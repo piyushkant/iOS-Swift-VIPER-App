@@ -9,11 +9,14 @@ import UIKit
 
 class CategoryListViewController: UITableViewController {
     
-    let category = ["Popular", "Top Rated", "Now Playing", "Upcoming"]
+    private let listTitle = "Movie List"
+    private let category = ["Popular", "Top Rated", "Now Playing", "Upcoming"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+      
+        self.title = self.listTitle
         self.tableView.tableFooterView = UIView()
     }
     
