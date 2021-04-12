@@ -9,7 +9,7 @@ import UIKit
 
 class CategoryListViewController: UITableViewController {
     
-    private let listTitle = "Movie List"
+    private let listTitle = "Movie Category"
     private let category = ["Popular", "Top Rated", "Now Playing", "Upcoming"]
     
     override func viewDidLoad() {
@@ -31,6 +31,7 @@ class CategoryListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped cell number \(indexPath.row).")
+        let movieListVC = MovieListRouter.createModule()
+        self.navigationController?.pushViewController(movieListVC, animated: true)
     }
 }
