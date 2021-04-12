@@ -14,8 +14,7 @@ class CategoryListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-      
+            
         self.title = self.listTitle
         self.tableView.tableFooterView = UIView()
     }

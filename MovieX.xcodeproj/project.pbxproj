@@ -15,6 +15,8 @@
 		4BF72CA626241DE3004A8456 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BF72CA426241DE3004A8456 /* LaunchScreen.storyboard */; };
 		4BF72CB126241DE3004A8456 /* MovieXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF72CB026241DE3004A8456 /* MovieXTests.swift */; };
 		4BF72CBC26241DE3004A8456 /* MovieXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF72CBB26241DE3004A8456 /* MovieXUITests.swift */; };
+		4BF72CE626243B12004A8456 /* Api-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BF72CE526243B12004A8456 /* Api-Info.plist */; };
+		4BF72CEC26243B7C004A8456 /* PropertyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF72CEB26243B7C004A8456 /* PropertyUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		4BF72CB726241DE3004A8456 /* MovieXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieXUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF72CBB26241DE3004A8456 /* MovieXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieXUITests.swift; sourceTree = "<group>"; };
 		4BF72CBD26241DE3004A8456 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4BF72CE526243B12004A8456 /* Api-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Api-Info.plist"; sourceTree = "<group>"; };
+		4BF72CEB26243B7C004A8456 /* PropertyUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 		4BF72C9826241DE2004A8456 /* MovieX */ = {
 			isa = PBXGroup;
 			children = (
+				4BF72CEA26243B6B004A8456 /* Utils */,
+				4BF72CE426243AE5004A8456 /* Properties */,
 				4BF72CE026243876004A8456 /* Resources */,
 				4BF72CDF26243867004A8456 /* Storyboards */,
 				4BF72CDE26243853004A8456 /* App */,
@@ -150,6 +156,22 @@
 				4BF72CA226241DE3004A8456 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		4BF72CE426243AE5004A8456 /* Properties */ = {
+			isa = PBXGroup;
+			children = (
+				4BF72CE526243B12004A8456 /* Api-Info.plist */,
+			);
+			path = Properties;
+			sourceTree = "<group>";
+		};
+		4BF72CEA26243B6B004A8456 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4BF72CEB26243B7C004A8456 /* PropertyUtils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +280,7 @@
 				4BF72CA626241DE3004A8456 /* LaunchScreen.storyboard in Resources */,
 				4BF72CA326241DE3004A8456 /* Assets.xcassets in Resources */,
 				4BF72CA126241DE2004A8456 /* Main.storyboard in Resources */,
+				4BF72CE626243B12004A8456 /* Api-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +307,7 @@
 			files = (
 				4BF72C9E26241DE2004A8456 /* MainViewController.swift in Sources */,
 				4BF72C9A26241DE2004A8456 /* AppDelegate.swift in Sources */,
+				4BF72CEC26243B7C004A8456 /* PropertyUtils.swift in Sources */,
 				4BF72C9C26241DE2004A8456 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
