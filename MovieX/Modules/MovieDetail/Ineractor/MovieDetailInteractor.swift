@@ -28,13 +28,11 @@ class MovieDetailInteractor: PresenterToInteractorMovieDetailProtocol {
                 
         Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString).responseJSON { response in
             if(response.response?.statusCode == 200) {
-                print(response)
-//                if let json = response.result.value as AnyObject? {
-//                    let arrayResponse = json["results"] as! NSArray
-//                    let arrayObject = Mapper<Movie>().mapArray(JSONArray: arrayResponse as! [[String : Any]]);
-//
-//                    self.presenter?.noticeFetchedSuccess(movieArray: arrayObject)
-//                }
+                if let json = response.result.value as AnyObject? {
+                    let detail = Mapper<MovieDetail>().map(JSON: json as! [String : Any])
+                    
+                    self.presenter?.noticeFetchedSuccess(detail: detail!)
+                }
             } else {
                 self.presenter?.noticeFetchFailed()
             }

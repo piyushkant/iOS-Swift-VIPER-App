@@ -98,6 +98,21 @@
             </objects>
             <point key="canvasLocation" x="2286.9565217391305" y="95.758928571428569"/>
         </scene>
+        <!--Movie Detail View Controller-->
+        <scene sceneID="90r-39-Ujq">
+            <objects>
+                <viewController storyboardIdentifier="MovieDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jgF-pd-NHb" customClass="MovieDetailViewController" customModule="MovieX" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rFP-he-5PF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Spq-A1-5sQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eaI-IN-Yco" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3093" y="96"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="ByK-lo-nOx">
             <objects>

@@ -29,7 +29,7 @@ enum EndPoint {
         case .upcoming:
             return EndPoint.apiBaseUrl.appendingPathComponent("upcoming")
         case .detail (let id):
-            return EndPoint.apiBaseUrl.appendingPathComponent("\(id)/home_timeline.json")
+            return EndPoint.apiBaseUrl.appendingPathComponent(String(describing: id))
         case .poster (let path):
             return EndPoint.posterBaseUrl.appendingPathComponent(path)
         }

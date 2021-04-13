@@ -22,7 +22,7 @@ class MovieListViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = movieListCategory?.value
-        self.setNavigationBarBackButton()
+        self.setNavigationBarBackCloseButton()
 
         self.presenter?.startFetchingMovieList(category: movieListCategory ?? .popular, page: page)
         
@@ -31,8 +31,8 @@ class MovieListViewController: UIViewController {
     }
 }
 
-extension MovieListViewController {
-    private func setNavigationBarBackButton() {
+extension UIViewController {
+    func setNavigationBarBackCloseButton() {
         self.navigationItem.setHidesBackButton(true, animated:true)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(self.dismissVC))
     }
@@ -82,8 +82,9 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("clicked row", indexPath.row)
-//        presenter?.showMovieController(navigationController: navigationController!)
+        let view = MovieDetailRouter.createModule()
+        view.id = movieList[indexPath.row].id
+        self.navigationController?.pushViewController(view, animated: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -10,10 +10,20 @@ import Alamofire
 
 class MovieDetailViewController: UIViewController {
     
+    private let detailTitle = "Detail"
+    var id: Int?
+    
     var presenter:ViewToPresenterMovieDetailProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = detailTitle
+        self.setNavigationBarBackCloseButton()
+        
+        if let id = self.id {
+            self.presenter?.startFetchingMovieDetail(id: id)
+        }
     }
 }
 
@@ -26,3 +36,5 @@ extension MovieDetailViewController: PresenterToViewMovieDetailProtocol {
         print("Error in fetching movie detail!")
     }
 }
+
+
