@@ -49,7 +49,7 @@ class PosterStore {
             }
         } else {
             OperationQueue.main.addOperation {
-                let noImage = UIImage(named: "poster")!
+                let noImage = UIImage(named: "empty")!
                 completion(.success(noImage))
             }
         }
