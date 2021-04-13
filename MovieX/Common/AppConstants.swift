@@ -15,7 +15,7 @@ enum EndPoint {
     case topRated
     case nowPlaying
     case upcoming
-    case details (id: String)
+    case detail (id: Int)
     case poster(path: String)
     
     var url: URL {
@@ -28,7 +28,7 @@ enum EndPoint {
             return EndPoint.apiBaseUrl.appendingPathComponent("now_playing")
         case .upcoming:
             return EndPoint.apiBaseUrl.appendingPathComponent("upcoming")
-        case .details (let id):
+        case .detail (let id):
             return EndPoint.apiBaseUrl.appendingPathComponent("\(id)/home_timeline.json")
         case .poster (let path):
             return EndPoint.posterBaseUrl.appendingPathComponent(path)

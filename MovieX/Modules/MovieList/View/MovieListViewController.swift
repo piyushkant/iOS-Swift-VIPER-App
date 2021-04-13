@@ -51,7 +51,7 @@ extension MovieListViewController: PresenterToViewMovieListProtocol {
     }
     
     func showError() {
-        print("Error in fetching!")
+        print("Error in fetching movie list!")
     }
 }
 
