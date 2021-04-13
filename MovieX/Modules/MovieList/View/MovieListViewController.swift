@@ -17,11 +17,24 @@ class MovieListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.setNavigationBarBackButton()
 
         self.presenter?.startFetchingMovieList(category: .popular, page: 1)
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+    }
+}
+
+extension MovieListViewController {
+    private func setNavigationBarBackButton() {
+        self.navigationItem.setHidesBackButton(true, animated:true)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(self.dismissVC))
+    }
+    
+    @objc private func dismissVC() {
+        if let nav = self.navigationController {nav.popViewController(animated: true)}
     }
 }
 
@@ -76,6 +89,7 @@ class MovieTableViewCell: UITableViewCell {
         } 
 
         titleLabel.text = movie?.title
+        titleLabel.textColor = .darkGray
         
         dateLabel.text = movie?.relaseDate
         dateLabel.textColor = .lightGray

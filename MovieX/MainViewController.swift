@@ -9,7 +9,8 @@ import UIKit
 
 class CategoryListViewController: UITableViewController {
     
-    private let listTitle = "Movie Category"
+    private let listTitle = "MovieX"
+    private let headerTitle = "Select a movie category"
     private let category = ["Popular", "Top Rated", "Now Playing", "Upcoming"]
     
     override func viewDidLoad() {
@@ -19,13 +20,22 @@ class CategoryListViewController: UITableViewController {
         self.tableView.tableFooterView = UIView()
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return headerTitle
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.category.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = self.category[indexPath.row]
+        cell.accessoryType = .disclosureIndicator
+        
+        let textLabel = cell.textLabel
+        textLabel?.text = self.category[indexPath.row]
+        textLabel?.font =  UIFont.boldSystemFont(ofSize: 17.0)
+        textLabel?.textColor = .darkGray
         
         return cell
     }
