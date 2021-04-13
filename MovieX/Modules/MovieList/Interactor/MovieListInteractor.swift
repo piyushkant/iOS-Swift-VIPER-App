@@ -25,7 +25,7 @@ class MovieListInteractor: PresenterToInteractorProtocol {
             "language": "en-US"
         ]
                 
-        Alamofire.request(EndPoint.popular.url, method: .get, parameters: parameters, encoding: URLEncoding.queryString).responseJSON { response in
+        Alamofire.request(getEndoint(category: category), method: .get, parameters: parameters, encoding: URLEncoding.queryString).responseJSON { response in
 
             if(response.response?.statusCode == 200) {
                 if let json = response.result.value as AnyObject? {
@@ -37,6 +37,19 @@ class MovieListInteractor: PresenterToInteractorProtocol {
             } else {
                 self.presenter?.noticeFetchFailed()
             }
+        }
+    }
+    
+    private func getEndoint(category: MovieListCategory) -> URL{
+        switch category {
+        case .popular:
+            return EndPoint.popular.url
+        case .topRated:
+            return EndPoint.topRated.url
+        case .nowPlaying:
+            return EndPoint.nowPlaying.url
+        case .upcoming:
+            return EndPoint.upcoming.url
         }
     }
 }

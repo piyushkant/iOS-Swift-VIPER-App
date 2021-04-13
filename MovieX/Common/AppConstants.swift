@@ -36,3 +36,23 @@ enum EndPoint {
     }
 }
 
+enum MovieListCategory {
+    case popular
+    case topRated
+    case nowPlaying
+    case upcoming
+    
+    var value: String {
+        switch self {
+        case .popular:
+            return "Popular"
+        case .topRated:
+            return "Top Rated"
+        case .nowPlaying:
+            return "Now Playing"
+        case .upcoming:
+            return "Upcoming"
+        }
+    }
+}
+

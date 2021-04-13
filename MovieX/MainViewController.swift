@@ -11,7 +11,7 @@ class CategoryListViewController: UITableViewController {
     
     private let listTitle = "MovieX"
     private let headerTitle = "Select a movie category"
-    private let category = ["Popular", "Top Rated", "Now Playing", "Upcoming"]
+    private let category = [MovieListCategory.popular.value, MovieListCategory.topRated.value, MovieListCategory.nowPlaying.value, MovieListCategory.upcoming.value]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +42,22 @@ class CategoryListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movieListVC = MovieListRouter.createModule()
+        movieListVC.movieListCategory = getMovieListCategory(row: indexPath.row)
         self.navigationController?.pushViewController(movieListVC, animated: true)
+    }
+    
+    private func getMovieListCategory(row: Int) -> MovieListCategory {
+        switch row {
+        case 0:
+            return .popular
+        case 1:
+            return .topRated
+        case 2:
+            return .nowPlaying
+        case 3:
+            return .upcoming
+        default:
+            return .popular
+        }
     }
 }

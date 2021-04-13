@@ -10,6 +10,8 @@ import Alamofire
 
 class MovieListViewController: UIViewController {
     
+    var movieListCategory: MovieListCategory?
+    
     @IBOutlet weak var tableView: UITableView!
     
     var presenter:ViewToPresenterProtocol?
@@ -20,7 +22,7 @@ class MovieListViewController: UIViewController {
         
         self.setNavigationBarBackButton()
 
-        self.presenter?.startFetchingMovieList(category: .popular, page: 1)
+        self.presenter?.startFetchingMovieList(category: movieListCategory ?? .popular, page: 1)
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -75,6 +77,23 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("clicked row", indexPath.row)
 //        presenter?.showMovieController(navigationController: navigationController!)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        var numOfSections: Int = 0
+      
+        if movieArray.count > 0 {
+            tableView.separatorStyle = .singleLine
+            numOfSections            = 1
+            tableView.backgroundView = nil
+        } else {
+            let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+            noDataLabel.textColor     = UIColor.black
+            noDataLabel.textAlignment = .center
+            tableView.backgroundView  = noDataLabel
+            tableView.separatorStyle  = .none
+        }
+        return numOfSections
     }
 }
 
