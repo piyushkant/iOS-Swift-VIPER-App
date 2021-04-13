@@ -26,6 +26,9 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var runtimeLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var revenueLabel: UILabel!
+    @IBOutlet weak var genresLabel: UILabel!
+    @IBOutlet weak var prodCompaniesLabel: UILabel!
+    @IBOutlet weak var prodCountriesLabel: UILabel!
     @IBOutlet weak var voteAvgLabel: UILabel!
     @IBOutlet weak var voteCountLabel: UILabel!
     
@@ -64,7 +67,46 @@ extension MovieDetailViewController {
         self.releaseDateLabel.text = "Release Date: \(detail.relaseDate ?? "")"
         self.runtimeLabel.text = "Runtime: \(detail.runtime ?? 0) mins"
         self.statusLabel.text = "Status: \(detail.status ?? "")"
-        self.statusLabel.text = "Revenue: \(detail.revenue ?? 0) USD"
+        self.revenueLabel.text = "Revenue: \(detail.revenue ?? 0) USD"
+        
+        var genr = ""
+        var count = 0
+        if let genres = detail.genres {
+            for genre in genres {
+                count += 1
+                
+                genr = genr + "\(genre.name ?? "")"
+                if count < genres.count {genr += ", "}
+            }
+        }
+        self.genresLabel.text = "Genres: \(genr)"
+        
+        var companies = ""
+        count = 0
+        if let prodCompanies = detail.prodCompanies {
+            for company in prodCompanies {
+                count += 1
+
+                companies = companies + "\(company.name ?? "")"
+                if count < prodCompanies.count {companies += ", "}
+            }
+        }
+        self.prodCompaniesLabel.text = "Prod Companies: \(companies)"
+        
+        var countries = ""
+        count = 0
+        if let prodCountries = detail.prodCountries {
+            for country in prodCountries {
+                count += 1
+
+                countries = countries + "\(country.name ?? "")"
+                if count < prodCountries.count {countries += ", "}
+            }
+        }
+        self.prodCountriesLabel.text = "Prod Countries: \(countries)"
+        
+        self.voteAvgLabel.text = "Vote average: \(detail.voteAvg ?? 0.0)"
+        self.voteCountLabel.text = "Vote count: \(detail.voteCount ?? 0)"
     }
 }
 

@@ -20,6 +20,11 @@ private let ORIGINAL_LANGUAGE = "original_language"
 private let RUNTIME = "runtime"
 private let STATUS = "status"
 private let REVENUE = "revenue"
+private let GENRES = "genres"
+private let PROD_COMPANIES = "production_companies"
+private let PROD_COUNTRIES = "production_countries"
+private let VOTE_AVG = "vote_average"
+private let VOTE_COUNT = "vote_count"
 
 class MovieDetail: Mappable {
     internal var id:Int?
@@ -34,12 +39,17 @@ class MovieDetail: Mappable {
     internal var runtime: Int?
     internal var status: String?
     internal var revenue: Int?
+    internal var genres: [Genre]?
+    internal var prodCompanies: [ProdCompanies]?
+    internal var prodCountries: [ProdCountries]?
+    internal var voteAvg: Float?
+    internal var voteCount: Int?
     
     required init?(map:Map) {
         mapping(map: map)
     }
     
-    func mapping(map:Map){
+    func mapping(map:Map) {
         id <- map[ID]
         title <- map[TITLE]
         relaseDate <- map[RELEASE_DATE]
@@ -52,5 +62,48 @@ class MovieDetail: Mappable {
         runtime <- map[RUNTIME]
         status <- map[STATUS]
         revenue <- map[REVENUE]
+        genres <- map[GENRES]
+        prodCompanies <- map[PROD_COMPANIES]
+        prodCountries <- map[PROD_COUNTRIES]
+        voteAvg <- map[VOTE_AVG]
+        voteCount <- map[VOTE_COUNT]
+    }
+}
+
+private let NAME = "name"
+
+class Genre: Mappable {
+    internal var name: String?
+    
+    required init?(map: Map) {
+        mapping(map: map)
+    }
+    
+    func mapping(map:Map) {
+        name <- map[NAME]
+    }
+}
+
+class ProdCompanies: Mappable {
+    internal var name: String?
+    
+    required init?(map: Map) {
+        mapping(map: map)
+    }
+    
+    func mapping(map:Map) {
+        name <- map[NAME]
+    }
+}
+
+class ProdCountries: Mappable {
+    internal var name: String?
+    
+    required init?(map: Map) {
+        mapping(map: map)
+    }
+    
+    func mapping(map:Map) {
+        name <- map[NAME]
     }
 }
