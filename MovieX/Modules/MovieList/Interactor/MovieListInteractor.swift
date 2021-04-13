@@ -10,7 +10,6 @@ import Alamofire
 import ObjectMapper
 
 class MovieListInteractor: PresenterToInteractorProtocol {
-    var allPosterData = [PosterData]()
     var presenter: InteractorToPresenterProtocol?
 
     func fetchMovieList(category: MovieListCategory, page: Int) {
@@ -25,13 +24,7 @@ class MovieListInteractor: PresenterToInteractorProtocol {
             "page": page,
             "language": "en-US"
         ]
-        
-        let session: URLSession = {
-            let config = URLSessionConfiguration.default
-            return URLSession(configuration: config)
-        }()
-        
-        
+                
         Alamofire.request(EndPoint.popular.url, method: .get, parameters: parameters, encoding: URLEncoding.queryString).responseJSON { response in
 
             if(response.response?.statusCode == 200) {
@@ -40,21 +33,6 @@ class MovieListInteractor: PresenterToInteractorProtocol {
                     let arrayObject = Mapper<Movie>().mapArray(JSONArray: arrayResponse as! [[String : Any]]);
                     
                     self.presenter?.noticeFetchedSuccess(movieArray: arrayObject)
-                    
-                    for movie in arrayObject {
-                        if let posterPath = movie.posterPath {
-                            let request = URLRequest(url: EndPoint.poster(path: posterPath).url)
-                                        
-                            let task = session.dataTask(with: request) {
-                                (data, response, error) -> Void in
-                                
-                                if let id = movie.id, let data = data {
-                                    self.allPosterData.append(PosterData(id: id, data: data))
-                                }
-                            }
-                            task.resume()
-                        }
-                    }
                 }
             } else {
                 self.presenter?.noticeFetchFailed()

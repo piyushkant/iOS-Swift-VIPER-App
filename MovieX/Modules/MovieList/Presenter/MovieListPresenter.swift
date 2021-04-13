@@ -19,20 +19,6 @@ class MovieListPresenter: ViewToPresenterProtocol {
         self.interactor?.fetchMovieList(category: category, page: page)
     }
     
-    func getMoviePoster(id: Int) -> UIImage? {
-        let emptyImage = UIImage(named: "empty")
-        
-        guard let allPosterData: [PosterData] = self.interactor?.allPosterData else {return emptyImage}
-        
-        for posterData in allPosterData {
-            if posterData.id == id {
-                return UIImage(data: posterData.data)
-            }
-        }
-        
-        return emptyImage
-    }
-    
     func showMovieDetailsController(navigationController: UINavigationController) {
         self.router?.pushToMovieDetailsScreen(navigationConroller: navigationController)
     }

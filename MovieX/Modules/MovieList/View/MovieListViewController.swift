@@ -14,7 +14,6 @@ class MovieListViewController: UIViewController {
     
     var presenter:ViewToPresenterProtocol?
     var movieArray: Array<Movie> = Array()
-    let posterStore = PosterStore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
