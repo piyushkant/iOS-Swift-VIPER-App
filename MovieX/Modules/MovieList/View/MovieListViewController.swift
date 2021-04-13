@@ -15,14 +15,16 @@ class MovieListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var presenter:ViewToPresenterProtocol?
-    var movieArray: Array<Movie> = Array()
+    var movieList: Array<Movie> = Array()
+    var page = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = movieListCategory?.value
         self.setNavigationBarBackButton()
 
-        self.presenter?.startFetchingMovieList(category: movieListCategory ?? .popular, page: 1)
+        self.presenter?.startFetchingMovieList(category: movieListCategory ?? .popular, page: page)
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -41,21 +43,22 @@ extension MovieListViewController {
 }
 
 extension MovieListViewController: PresenterToViewProtocol {
+    
     func showMovieList(movieArray: Array<Movie>) {
-        self.movieArray = movieArray
+        self.movieList.append(contentsOf: movieArray)
         self.tableView.reloadData()
         self.tableView.tableFooterView = UIView()
     }
-
+    
     func showError() {
-        print("Error in fetching!!!!")
+        print("Error in fetching!")
     }
 }
 
 extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieArray.count
+        return movieList.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -65,11 +68,15 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = "movieCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MovieTableViewCell
-        cell.accessoryType = .disclosureIndicator
        
-        let movie = movieArray[indexPath.row]
+        let movie = movieList[indexPath.row]
         
         cell.update(movie: movie)
+        
+        if indexPath.row == movieList.count - 1 {
+            page += 1
+            self.presenter?.startFetchingMovieList(category: movieListCategory ?? .popular, page: page)
+        }
         
         return cell
     }
@@ -82,7 +89,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         var numOfSections: Int = 0
       
-        if movieArray.count > 0 {
+        if movieList.count > 0 {
             tableView.separatorStyle = .singleLine
             numOfSections            = 1
             tableView.backgroundView = nil
