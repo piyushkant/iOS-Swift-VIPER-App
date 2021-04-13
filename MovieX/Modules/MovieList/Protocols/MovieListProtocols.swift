@@ -13,6 +13,7 @@ protocol ViewToPresenterProtocol: class {
     var interactor: PresenterToInteractorProtocol? {get set}
     var router: PresenterToRouterProtocol? {get set}
     func startFetchingMovieList(category: MovieListCategory, page: Int)
+    func getMoviePoster(id: Int) -> UIImage?
     func showMovieDetailsController(navigationController:UINavigationController)
 }
 
@@ -29,6 +30,7 @@ protocol PresenterToRouterProtocol: class {
 protocol PresenterToInteractorProtocol: class {
     var presenter:InteractorToPresenterProtocol? {get set}
     func fetchMovieList(category: MovieListCategory, page: Int)
+    var allPosterData: [PosterData] {get}
 }
 
 protocol InteractorToPresenterProtocol: class {

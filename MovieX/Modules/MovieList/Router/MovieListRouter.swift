@@ -17,7 +17,7 @@ class MovieListRouter: PresenterToRouterProtocol {
         let interactor: PresenterToInteractorProtocol = MovieListInteractor()
         let router: PresenterToRouterProtocol = MovieListRouter()
         
-        view.presentor = presenter
+        view.presenter = presenter
         presenter.view = view
         presenter.router = router
         presenter.interactor = interactor

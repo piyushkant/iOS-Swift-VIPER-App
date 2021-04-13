@@ -14,9 +14,23 @@ class MovieListPresenter: ViewToPresenterProtocol {
     var interactor: PresenterToInteractorProtocol?
     
     var router: PresenterToRouterProtocol?
-    
+        
     func startFetchingMovieList(category: MovieListCategory, page: Int) {
         self.interactor?.fetchMovieList(category: category, page: page)
+    }
+    
+    func getMoviePoster(id: Int) -> UIImage? {
+        let emptyImage = UIImage(named: "empty")
+        
+        guard let allPosterData: [PosterData] = self.interactor?.allPosterData else {return emptyImage}
+        
+        for posterData in allPosterData {
+            if posterData.id == id {
+                return UIImage(data: posterData.data)
+            }
+        }
+        
+        return emptyImage
     }
     
     func showMovieDetailsController(navigationController: UINavigationController) {
@@ -25,7 +39,6 @@ class MovieListPresenter: ViewToPresenterProtocol {
 }
 
 extension MovieListPresenter: InteractorToPresenterProtocol {
-  
     func noticeFetchedSuccess(movieArray: Array<Movie>) {
         view?.showMovieList(movieArray: movieArray)
     }

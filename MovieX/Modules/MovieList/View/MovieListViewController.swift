@@ -12,14 +12,14 @@ class MovieListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var presentor:ViewToPresenterProtocol?
+    var presenter:ViewToPresenterProtocol?
     var movieArray: Array<Movie> = Array()
     let posterStore = PosterStore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.presentor?.startFetchingMovieList(category: .popular, page: 1)
+        self.presenter?.startFetchingMovieList(category: .popular, page: 1)
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -51,43 +51,30 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = "movieCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MovieTableViewCell
+       
         let movie = movieArray[indexPath.row]
         
-        posterStore.fetchImage(for: movie, completion: { (result) -> Void in
-            
-            guard let _ = self.movieArray.firstIndex(of: movie),
-                case let .success(image) = result else {
-                    return
-            }
-            
-            cell.update(image: image, title: movie.title)
-        })
+        guard let id = movie.id, let title = movie.title else {return cell}
+        
+        if let image = self.presenter?.getMoviePoster(id: id) {
+            cell.update(image: image, title: title)
+        } else {
+            cell.update(image: nil, title: title)
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("clicked row", indexPath.row)
-//        presentor?.showMovieController(navigationController: navigationController!)
+//        presenter?.showMovieController(navigationController: navigationController!)
     }
 }
 
 class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        update(image: nil, title: nil)
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        update(image: nil, title: nil)
-    }
-    
+
     func update(image: UIImage?, title: String?) {
         posterImageView.image = image
         titleLabel.text = title
