@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-class MovieListPresenter: ViewToPresenterProtocol {
-    var view: PresenterToViewProtocol?
+class MovieListPresenter: ViewToPresenterMovieListProtocol {
+    var view: PresenterToViewMovieListProtocol?
     
-    var interactor: PresenterToInteractorProtocol?
+    var interactor: PresenterToInteractorMovieListProtocol?
     
-    var router: PresenterToRouterProtocol?
+    var router: PresenterToRouterMovieListProtocol?
         
     func startFetchingMovieList(category: MovieListCategory, page: Int) {
         self.interactor?.fetchMovieList(category: category, page: page)
@@ -24,7 +24,7 @@ class MovieListPresenter: ViewToPresenterProtocol {
     }
 }
 
-extension MovieListPresenter: InteractorToPresenterProtocol {
+extension MovieListPresenter: InteractorToPresenterMovieListProtocol {
     func noticeFetchedSuccess(movieArray: Array<Movie>) {
         view?.showMovieList(movieArray: movieArray)
     }

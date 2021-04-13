@@ -8,30 +8,30 @@
 import Foundation
 import UIKit
 
-protocol ViewToPresenterProtocol: class {
-    var view: PresenterToViewProtocol? {get set}
-    var interactor: PresenterToInteractorProtocol? {get set}
-    var router: PresenterToRouterProtocol? {get set}
+protocol ViewToPresenterMovieListProtocol: class {
+    var view: PresenterToViewMovieListProtocol? {get set}
+    var interactor: PresenterToInteractorMovieListProtocol? {get set}
+    var router: PresenterToRouterMovieListProtocol? {get set}
     func startFetchingMovieList(category: MovieListCategory, page: Int)
     func showMovieDetailsController(navigationController:UINavigationController)
 }
 
-protocol PresenterToViewProtocol: class {
+protocol PresenterToViewMovieListProtocol: class {
     func showMovieList(movieArray:Array<Movie>)
     func showError()
 }
 
-protocol PresenterToRouterProtocol: class {
+protocol PresenterToRouterMovieListProtocol: class {
     static func createModule()-> MovieListViewController
     func pushToMovieDetailsScreen(navigationConroller:UINavigationController)
 }
 
-protocol PresenterToInteractorProtocol: class {
-    var presenter:InteractorToPresenterProtocol? {get set}
+protocol PresenterToInteractorMovieListProtocol: class {
+    var presenter:InteractorToPresenterMovieListProtocol? {get set}
     func fetchMovieList(category: MovieListCategory, page: Int)
 }
 
-protocol InteractorToPresenterProtocol: class {
+protocol InteractorToPresenterMovieListProtocol: class {
     func noticeFetchedSuccess(movieArray:Array<Movie>)
     func noticeFetchFailed()
 }

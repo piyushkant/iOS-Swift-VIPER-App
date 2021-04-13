@@ -14,7 +14,7 @@ class MovieListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var presenter:ViewToPresenterProtocol?
+    var presenter:ViewToPresenterMovieListProtocol?
     var movieList: Array<Movie> = Array()
     var page = 1
 
@@ -42,7 +42,7 @@ extension MovieListViewController {
     }
 }
 
-extension MovieListViewController: PresenterToViewProtocol {
+extension MovieListViewController: PresenterToViewMovieListProtocol {
     
     func showMovieList(movieArray: Array<Movie>) {
         self.movieList.append(contentsOf: movieArray)
