@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0DC407812BBC7B0C3976E337 /* Pods_MovieX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7DC255E7BD226C85B0A43A /* Pods_MovieX.framework */; };
+		4B0B9FD4262549DE0030914A /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0B9FD3262549DE0030914A /* UIImageView+Extension.swift */; };
 		4BF72C9A26241DE2004A8456 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF72C9926241DE2004A8456 /* AppDelegate.swift */; };
 		4BF72C9C26241DE2004A8456 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF72C9B26241DE2004A8456 /* SceneDelegate.swift */; };
 		4BF72C9E26241DE2004A8456 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF72C9D26241DE2004A8456 /* MainViewController.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		0A428CC65ACC5021689D9285 /* Pods-MovieX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieX.release.xcconfig"; path = "Target Support Files/Pods-MovieX/Pods-MovieX.release.xcconfig"; sourceTree = "<group>"; };
+		4B0B9FD3262549DE0030914A /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		4BF72C9626241DE2004A8456 /* MovieX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF72C9926241DE2004A8456 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4BF72C9B26241DE2004A8456 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B0B9FD2262549B60030914A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4B0B9FD3262549DE0030914A /* UIImageView+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		4BF72C8D26241DE2004A8456 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +127,7 @@
 		4BF72C9826241DE2004A8456 /* MovieX */ = {
 			isa = PBXGroup;
 			children = (
+				4B0B9FD2262549B60030914A /* Extensions */,
 				4BF72D4926245058004A8456 /* Common */,
 				4BF72CFA2624402E004A8456 /* Modules */,
 				4BF72CEA26243B6B004A8456 /* Utils */,
@@ -460,6 +471,7 @@
 				4BF72D4B26245065004A8456 /* AppConstants.swift in Sources */,
 				4BF72CEC26243B7C004A8456 /* PropertyUtils.swift in Sources */,
 				4BF72D4626244FA3004A8456 /* MovieListCategory.swift in Sources */,
+				4B0B9FD4262549DE0030914A /* UIImageView+Extension.swift in Sources */,
 				4BF72D6D262496DB004A8456 /* ImageStore.swift in Sources */,
 				4BF72D0A262449A9004A8456 /* MovieListProtocols.swift in Sources */,
 				4BF72C9C26241DE2004A8456 /* SceneDelegate.swift in Sources */,

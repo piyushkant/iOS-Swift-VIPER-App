@@ -55,17 +55,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
        
         let movie = movieArray[indexPath.row]
         
-        cell.update(image: UIImage(named: "empty"), title: movie.title, date: movie.relaseDate)
-        
-        posterStore.fetchImage(for: movie, completion: { (result) -> Void in
-            guard let _ = self.movieArray.firstIndex(of: movie),
-                case let .success(image) = result else {
-                    return
-            }
-            
-  
-            cell.update(image: image, title: movie.title, date: movie.relaseDate)
-        })
+        cell.update(movie: movie)
         
         return cell
     }
@@ -81,21 +71,14 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        update(image: nil, title: nil, date: nil)
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        update(image: nil, title: nil, date: nil)
-    }
+    func update(movie: Movie?) {
+        if let posterPath  = movie?.posterPath {
+            posterImageView.load(urlString: EndPoint.poster(path: posterPath).url.absoluteString)
+        } 
 
-    func update(image: UIImage?, title: String?, date: String?) {
-        posterImageView.image = image
-        titleLabel.text = title
-        dateLabel.text = date
+        titleLabel.text = movie?.title
+        
+        dateLabel.text = movie?.relaseDate
+        dateLabel.textColor = .lightGray
     }
 }
