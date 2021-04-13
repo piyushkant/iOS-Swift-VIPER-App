@@ -16,6 +16,7 @@ class MovieDetailViewController: UIViewController {
     var detail: MovieDetail?
     var presenter:ViewToPresenterMovieDetailProtocol?
     
+    @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var overviewTextField: UITextView!
     @IBOutlet weak var adultLabel: UILabel!
@@ -58,6 +59,10 @@ extension MovieDetailViewController: PresenterToViewMovieDetailProtocol {
 extension MovieDetailViewController {
     
     private func setupUI(detail: MovieDetail) {
+        if let posterPath = detail.posterPath {
+            posterImageView.load(urlString: EndPoint.poster(path: posterPath).url.absoluteString)
+        }
+        
         self.titleLabel.text = detail.title
         self.overviewTextField.text = detail.overview
         self.adultLabel.text = "Adult: \(detail.adult ?? false)"

@@ -227,6 +227,7 @@
                         <outlet property="homepageLabel" destination="dax-PJ-gNx" id="8Ix-aQ-huh"/>
                         <outlet property="originalLanguageLabel" destination="4K6-Xv-9ax" id="YbT-Yx-F7z"/>
                         <outlet property="overviewTextField" destination="6o9-H7-K3G" id="eCo-zt-Z0j"/>
+                        <outlet property="posterImageView" destination="Mbn-10-w8r" id="DtU-bh-845"/>
                         <outlet property="prodCompaniesLabel" destination="9RN-ai-NCZ" id="qaw-KF-Fxm"/>
                         <outlet property="prodCountriesLabel" destination="sXg-no-hcI" id="lTB-sk-4fR"/>
                         <outlet property="releaseDateLabel" destination="qvz-9c-g68" id="Ng9-VP-mKi"/>
