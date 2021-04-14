@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-class MovieListRouter: PresenterToRouterProtocol {
+class MovieListRouter: PresenterToRouterMovieListProtocol {
     
     static func createModule() -> MovieListViewController {        
         let view = mainStoryboard.instantiateViewController(withIdentifier: "MovieListViewController") as! MovieListViewController
         
-        let presenter: ViewToPresenterProtocol & InteractorToPresenterProtocol = MovieListPresenter()
-        let interactor: PresenterToInteractorProtocol = MovieListInteractor()
-        let router: PresenterToRouterProtocol = MovieListRouter()
+        let presenter: ViewToPresenterMovieListProtocol & InteractorToPresenterMovieListProtocol = MovieListPresenter()
+        let interactor: PresenterToInteractorMovieListProtocol = MovieListInteractor()
+        let router: PresenterToRouterMovieListProtocol = MovieListRouter()
         
         view.presenter = presenter
         presenter.view = view

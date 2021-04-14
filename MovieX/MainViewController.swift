@@ -45,9 +45,14 @@ class CategoryListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let movieListVC = MovieListRouter.createModule()
-        movieListVC.movieListCategory = getMovieListCategory(row: indexPath.row)
-        self.navigationController?.pushViewController(movieListVC, animated: true)
+        let view = MovieListRouter.createModule()
+        view.movieListCategory = getMovieListCategory(row: indexPath.row)
+        self.navigationController?.pushViewController(view, animated: true)
+        
+//        //remove me
+//        let view = MovieDetailRouter.createModule()
+//        view.id = 399566
+//        self.navigationController?.pushViewController(view, animated: true)
     }
     
     private func getMovieListCategory(row: Int) -> MovieListCategory {

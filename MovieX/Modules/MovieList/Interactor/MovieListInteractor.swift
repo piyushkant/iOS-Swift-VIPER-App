@@ -9,8 +9,8 @@ import Foundation
 import Alamofire
 import ObjectMapper
 
-class MovieListInteractor: PresenterToInteractorProtocol {
-    var presenter: InteractorToPresenterProtocol?
+class MovieListInteractor: PresenterToInteractorMovieListProtocol {
+    var presenter: InteractorToPresenterMovieListProtocol?
 
     func fetchMovieList(category: MovieListCategory, page: Int) {
         var apiKey: String {

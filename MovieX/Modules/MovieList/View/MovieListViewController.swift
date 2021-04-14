@@ -14,7 +14,7 @@ class MovieListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var presenter:ViewToPresenterProtocol?
+    var presenter:ViewToPresenterMovieListProtocol?
     var movieList: Array<Movie> = Array()
     var page = 1
 
@@ -22,7 +22,7 @@ class MovieListViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = movieListCategory?.value
-        self.setNavigationBarBackButton()
+        self.setNavigationBarBackCloseButton()
 
         self.presenter?.startFetchingMovieList(category: movieListCategory ?? .popular, page: page)
         
@@ -31,8 +31,8 @@ class MovieListViewController: UIViewController {
     }
 }
 
-extension MovieListViewController {
-    private func setNavigationBarBackButton() {
+extension UIViewController {
+    func setNavigationBarBackCloseButton() {
         self.navigationItem.setHidesBackButton(true, animated:true)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(self.dismissVC))
     }
@@ -42,7 +42,7 @@ extension MovieListViewController {
     }
 }
 
-extension MovieListViewController: PresenterToViewProtocol {
+extension MovieListViewController: PresenterToViewMovieListProtocol {
     
     func showMovieList(movieArray: Array<Movie>) {
         self.movieList.append(contentsOf: movieArray)
@@ -51,7 +51,7 @@ extension MovieListViewController: PresenterToViewProtocol {
     }
     
     func showError() {
-        print("Error in fetching!")
+        print("Error in fetching movie list!")
     }
 }
 
@@ -82,8 +82,9 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("clicked row", indexPath.row)
-//        presenter?.showMovieController(navigationController: navigationController!)
+        let view = MovieDetailRouter.createModule()
+        view.id = movieList[indexPath.row].id
+        self.navigationController?.pushViewController(view, animated: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
