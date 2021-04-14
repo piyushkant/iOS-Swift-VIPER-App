@@ -64,8 +64,11 @@ extension MovieDetailViewController {
         }
         
         self.titleLabel.text = detail.title
+        
         self.overviewTextField.text = detail.overview
         self.overviewTextField.isEditable = false
+        self.overviewTextField.flashScrollIndicators()
+        
         self.adultLabel.text = "Adult: \(detail.adult ?? false)"
         self.budgetLabel.text = "Budget: \(detail.budget ?? 0) USD"
         
