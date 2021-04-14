@@ -18,10 +18,10 @@ class MovieDetailViewController: UIViewController {
     
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var homepageTextView: UITextView!
     @IBOutlet weak var overviewTextField: UITextView!
     @IBOutlet weak var adultLabel: UILabel!
     @IBOutlet weak var budgetLabel: UILabel!
-    @IBOutlet weak var homepageLabel: UILabel!
     @IBOutlet weak var originalLanguageLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var runtimeLabel: UILabel!
@@ -65,9 +65,15 @@ extension MovieDetailViewController {
         
         self.titleLabel.text = detail.title
         self.overviewTextField.text = detail.overview
+        self.overviewTextField.isEditable = false
         self.adultLabel.text = "Adult: \(detail.adult ?? false)"
         self.budgetLabel.text = "Budget: \(detail.budget ?? 0) USD"
-        self.homepageLabel.text = "Homepage: \(detail.homepage ?? "")"
+        
+        let attributedString = NSMutableAttributedString(string: "HomePage")
+        attributedString.addAttribute(.link, value: detail.homepage ?? "", range: NSRange(location: 0, length: 8))
+        
+        self.homepageTextView.attributedText = attributedString
+                
         self.originalLanguageLabel.text = "Original Language: \(detail.originalLanguage ?? "")"
         self.releaseDateLabel.text = "Release Date: \(detail.relaseDate ?? "")"
         self.runtimeLabel.text = "Runtime: \(detail.runtime ?? 0) mins"
