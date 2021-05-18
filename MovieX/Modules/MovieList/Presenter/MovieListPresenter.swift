@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class MovieListPresenter: ViewToPresenterMovieListProtocol {
+    
     var view: PresenterToViewMovieListProtocol?
     
     var interactor: PresenterToInteractorMovieListProtocol?
@@ -22,11 +23,19 @@ class MovieListPresenter: ViewToPresenterMovieListProtocol {
     func showMovieDetailsController(navigationController: UINavigationController) {
         self.router?.pushToMovieDetailsScreen(navigationConroller: navigationController)
     }
+    
+    func save(movie: Movie) {
+        self.interactor?.storeMovieToDb(movie: movie)
+    }
+    
+    func remove(movie: Movie) {
+        self.interactor?.removeMovieFromDb(movie: movie)
+    }
 }
 
 extension MovieListPresenter: InteractorToPresenterMovieListProtocol {
-    func noticeFetchedSuccess(movieArray: Array<Movie>) {
-        view?.showMovieList(movieArray: movieArray)
+    func noticeFetchedSuccess(movieArray: Array<Movie>, isModified: Bool) {
+        view?.showMovieList(movieArray: movieArray, isModified: isModified)
     }
     
     func noticeFetchFailed() {

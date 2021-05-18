@@ -10,7 +10,7 @@ import UIKit
 
 class MovieListRouter: PresenterToRouterMovieListProtocol {
     
-    static func createModule() -> MovieListViewController {        
+    static func createModule() -> MovieListViewController {
         let view = mainStoryboard.instantiateViewController(withIdentifier: "MovieListViewController") as! MovieListViewController
         
         let presenter: ViewToPresenterMovieListProtocol & InteractorToPresenterMovieListProtocol = MovieListPresenter()
@@ -31,8 +31,6 @@ class MovieListRouter: PresenterToRouterMovieListProtocol {
     }
     
     func pushToMovieDetailsScreen(navigationConroller: UINavigationController) {
-//        let movieDetailsModule = MovieDetailsRouter.createMovieDetailsModule()
-//        navigationController.pushViewController(movieDetailsModule, animated: true)
     }
     
 }

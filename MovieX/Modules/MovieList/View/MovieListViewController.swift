@@ -44,8 +44,13 @@ extension UIViewController {
 
 extension MovieListViewController: PresenterToViewMovieListProtocol {
     
-    func showMovieList(movieArray: Array<Movie>) {
-        self.movieList.append(contentsOf: movieArray)
+    func showMovieList(movieArray: Array<Movie>, isModified: Bool) {
+        if isModified {
+            self.movieList = movieArray
+        } else {
+            self.movieList.append(contentsOf: movieArray)
+        }
+        
         self.tableView.reloadData()
         self.tableView.tableFooterView = UIView()
     }
@@ -73,7 +78,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.update(movie: movie)
         
-        if indexPath.row == movieList.count - 1 {
+        if movieListCategory != .favourite && indexPath.row == movieList.count - 1 {
             page += 1
             self.presenter?.startFetchingMovieList(category: movieListCategory ?? .popular, page: page)
         }
@@ -96,12 +101,36 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.backgroundView = nil
         } else {
             let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-            noDataLabel.textColor     = UIColor.black
+            noDataLabel.textColor     = UIColor.darkGray
+            noDataLabel.font = .boldSystemFont(ofSize: 14)
             noDataLabel.textAlignment = .center
+            noDataLabel.text = movieListCategory == MovieListCategory.favourite ? "Empty favourite movie list" : ""
             tableView.backgroundView  = noDataLabel
-            tableView.separatorStyle  = .none
+            tableView .separatorStyle  = .none
         }
         return numOfSections
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let favourite = UIContextualAction(style: .normal, title: "Fav") {  (contextualAction, view, boolValue) in
+            tableView.setEditing(false, animated: true)
+            
+            self.presenter?.save(movie: self.movieList[indexPath.row])
+        }
+                        
+        var swipeActions = UISwipeActionsConfiguration(actions: [favourite])
+        
+        if movieListCategory == MovieListCategory.favourite {
+            let remove = UIContextualAction(style: .destructive, title: "Remove") {  (contextualAction, view, boolValue) in
+                tableView.setEditing(false, animated: true)
+                
+                self.presenter?.remove(movie: self.movieList[indexPath.row])
+            }
+            
+            swipeActions = UISwipeActionsConfiguration(actions: [remove])
+        }
+
+        return swipeActions
     }
 }
 
@@ -113,7 +142,7 @@ class MovieTableViewCell: UITableViewCell {
     func update(movie: Movie?) {
         if let posterPath  = movie?.posterPath {
             posterImageView.load(urlString: EndPoint.poster(path: posterPath).url.absoluteString)
-        } 
+        }
 
         titleLabel.text = movie?.title
         titleLabel.textColor = .darkGray

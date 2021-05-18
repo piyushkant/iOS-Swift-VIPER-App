@@ -7,8 +7,8 @@ target 'MovieX' do
 
   # Pods for MovieX
   pod 'Alamofire', '~> 4.0'
-#  pod 'AlamofireImage', '~> 3.3'
   pod 'AlamofireObjectMapper', '~> 5.0'
+#  pod 'RealmSwift'
 
   target 'MovieXTests' do
     inherit! :search_paths

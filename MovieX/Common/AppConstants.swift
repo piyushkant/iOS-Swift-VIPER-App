@@ -41,6 +41,7 @@ enum MovieListCategory {
     case topRated
     case nowPlaying
     case upcoming
+    case favourite
     
     var value: String {
         switch self {
@@ -52,6 +53,8 @@ enum MovieListCategory {
             return "Now Playing"
         case .upcoming:
             return "Upcoming"
+        case .favourite:
+            return "Favourite"
         }
     }
 }
